@@ -4,9 +4,10 @@
 
 `apito-backend` needs that the listed environment variables in `.env.example` to be available to correctly run.
 
-## Database
+## Misc
 
-A database named in the `$DATABASE_URL` environment variable should be available.
+-   Default port is at `:5000`
+-   Prefix: `/api/`
 
 ## Endpoints
 
@@ -20,9 +21,6 @@ A database named in the `$DATABASE_URL` environment variable should be available
 | PUT    | /referees/{id} | 200  | Updates a Referee.      |
 | DELETE | /referees/{id} | 204  | Deletes a Referee       |
 
--   Default port is at `:5000`
--   Prefix: `/api/v1`
-
 ## Installation
 
 Get all dependencies and install with:
@@ -33,30 +31,23 @@ Get all dependencies and install with:
 
 ### OpenAPI
 
-API specification is generated at every release and can placed at the ops folder.
-
-A Swagger UI is also available:
-
-    $ make spec
-
-PS: To generate the correct current api version, do export an environment variable `$APITO_BACKEND_VERSION` returning `.version` value.
+The current description of the API can be found at `ops/openapi_*.json`.
 
 ### Insomnia
 
-Insomnia tasks are available to easy reproducibility of the API endpoints, the
-latest files are at the ops folder.
+Insomnia tasks are available at the `ops` folder.
 
 ### Container images
 
 [Docker Hub](https://hub.docker.com/r/easbarbosa/apito)
 
-### SQL
+## Database
 
-All SQL related tasks files are in `ops/sql`, you easily run those with the target prefixed by `db` in the `Makefile`.
+All SQL related tasks files are in `ops/sql`, there are some goal in the `Makefile` to automate the process.
 
-    `make dbclean`
+A database named in the `$DATABASE_URL` environment variable should be available.
 
-PS: Database engine will expect its password to be set. `PGPASSWORD=meh123`
+PS: PostgreSQL expects its password as: `PGPASSWORD=meh123`.
 
 ## License
 

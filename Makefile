@@ -1,3 +1,24 @@
+.DEFAULT_GOAL := run
+.PHONY := run cache deps repl test lint dbstart dbclean shell fmt
+
+run:
+	php artisan serve --port=${PORT}
+
+cache:
+	php artisan route:cache
+
+repl:
+	php artisan tinker
+
+fmt:
+	./vendor/bin/pint
+
+test:
+	php artisan test
+
+deps:
+	composer install
+
 dbstart:
 	psql -U ${DB_USERNAME} -d postgres -a -f ops/sql/start.sql
 
@@ -6,13 +27,3 @@ dbclean:
 
 shell:
 	guix shell --pure --container
-
-# .DEFAULT_GOAL := run
-# deps:
-# test:
-# build:
-# lint:
-# vet:
-# run:
-# imports:
-# watch:
