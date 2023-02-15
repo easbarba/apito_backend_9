@@ -9,6 +9,7 @@ use App\Models\Referee;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response;
 
 class RefereeController extends Controller
 {
@@ -25,7 +26,8 @@ class RefereeController extends Controller
      */
     public function show(Referee $referee): JsonResponse
     {
-        return response()->json(['data' => new RefereeResource($referee)], 200);
+        return response()->json(['data' => new RefereeResource($referee)],
+            Response::HTTP_OK);
     }
 
     /**
@@ -35,7 +37,8 @@ class RefereeController extends Controller
     {
         $referee = Referee::create($request->all());
 
-        return response()->json(['data' => new RefereeResource($referee)], 201);
+        return response()->json(['data' => new RefereeResource($referee)],
+            Response::HTTP_CREATED);
     }
 
     /**
@@ -45,7 +48,8 @@ class RefereeController extends Controller
     {
         $referee->update($request->all());
 
-        return response()->json(['data' => new RefereeResource($referee)], 200);
+        return response()->json(['data' => new RefereeResource($referee)],
+            Response::HTTP_OK);
     }
 
     /**
@@ -55,6 +59,6 @@ class RefereeController extends Controller
     {
         $referee->delete();
 
-        return response()->json(null, 204);
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }
