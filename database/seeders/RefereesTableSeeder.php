@@ -19,7 +19,7 @@ class RefereesTableSeeder extends Seeder
 
         $faker = \Faker\Factory::create();
 
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             Referee::create([
                 'name' => $faker->name,
                 'state' => $faker->state,
