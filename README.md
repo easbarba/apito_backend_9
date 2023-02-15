@@ -7,7 +7,7 @@
 ## Misc
 
 -   Default port is at `:5000`
--   Prefix: `/api/`
+-   Prefix: `/api/v1`
 
 ## Endpoints
 
