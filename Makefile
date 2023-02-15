@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := run
-.PHONY := run cache deps repl test lint dbstart dbclean shell fmt boot
+API_PATH := ${PORT}/api/v1/referees
 
 run:
 	php artisan serve --port=${PORT}
@@ -23,11 +23,25 @@ test:
 deps:
 	composer install
 
-dbstart:
+db-start:
 	psql -U ${DB_USERNAME} -d postgres -a -f ops/sql/start.sql
 
-dbclean:
+db-clean:
 	psql -U ${DB_USERNAME} -d postgres -a -f ops/sql/clean.sql
 
-shell:
+system:
 	guix shell --pure --container
+
+api-new:
+	http post :${API_PATH} name='Paulo Cesar' state='DF'
+
+api-all:
+	http get :${API_PATH}
+
+api-one:
+	http get :${API_PATH}/4
+
+api-delete:
+	http delete :${API_PATH}/2
+
+.PHONY := run cache deps repl test lint db-start db-clean system fmt boot api-new api-delete api-all api-one
