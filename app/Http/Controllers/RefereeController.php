@@ -16,9 +16,11 @@ class RefereeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): AnonymousResourceCollection
+    public function index(Request $request): AnonymousResourceCollection
     {
-        return RefereeResource::collection(Referee::all());
+        $sortColumn = $request->input('sort', 'id');
+
+        return RefereeResource::collection(Referee::orderBy($sortColumn, 'desc')->paginate(8));
     }
 
     /**
