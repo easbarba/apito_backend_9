@@ -14,6 +14,9 @@ cache:
 repl:
 	php artisan tinker
 
+lint:
+	./vendor/bin/phpinsights
+
 fmt:
 	./vendor/bin/pint
 
