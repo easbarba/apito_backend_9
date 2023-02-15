@@ -1,8 +1,12 @@
 .DEFAULT_GOAL := run
-.PHONY := run cache deps repl test lint dbstart dbclean shell fmt
+.PHONY := run cache deps repl test lint dbstart dbclean shell fmt boot
 
 run:
 	php artisan serve --port=${PORT}
+
+boot:
+	php artisan migrate:refresh
+	php artisan db:seed
 
 cache:
 	php artisan route:cache
