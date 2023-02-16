@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := run
-API_PATH := ${PORT}/api/v1/referees
+API_PATH := ${PORT}/api/v1
 
 run:
 	php artisan serve --port=${PORT}
@@ -35,16 +35,24 @@ db-clean:
 system:
 	guix shell --pure --container
 
-api-new:
-	http post :${API_PATH} name='Paulo Cesar' state='DF'
-
 api-all:
-	http get :${API_PATH}
+	http get :${API_PATH}/referees
+    http get :${API_PATH}/teams
 
-api-one:
-	http get :${API_PATH}/4
+api-single:
+	http get :${API_PATH}/referees/4
+    http get :${API_PATH}/teams/4
+
+api-new:
+	http post :${API_PATH}/referees name='Paulo Cesar' state='DF'
+    http post :${API_PATH}/teams name='Corinthians' state='Sao Paulo'
+
+api-update:
+	http patch :${API_PATH}/referees/5 state='Distrito Federal'
+    http patch :${API_PATH}/teams/5 state='Sao Paulo'
 
 api-delete:
-	http delete :${API_PATH}/2
+	http delete :${API_PATH}/referees/2
+    http delete :${API_PATH}/teams/2
 
-.PHONY := run cache deps repl test lint db-start db-clean system fmt boot api-new api-delete api-all api-one
+.PHONY := run cache deps repl test lint db-start db-clean system fmt boot api-new api-delete api-all api-single api-update
