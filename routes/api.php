@@ -22,4 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('v1')->group(function () {
     Route::apiResource('referees', '\App\Http\Controllers\RefereeController');
+    Route::fallback(function () {
+        return response()->json(['message' => 'Route Not Found'], 404);
+    })->name('api.fallback.404');
 });
