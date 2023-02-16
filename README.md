@@ -11,15 +11,7 @@
 
 ## Endpoints
 
-### Referees
-
-| method | Pattern        | Code | Action                  |
-| ------ | -------------- | ---- | ----------------------- |
-| GET    | /referees      | 200  | Fetches all Referees.   |
-| POST   | /referees      | 201  | Create a new Referee.   |
-| GET    | /referees/{id} | 200  | Fetch a single Referee. |
-| PUT    | /referees/{id} | 200  | Updates a Referee.      |
-| DELETE | /referees/{id} | 204  | Deletes a Referee       |
+More information on endpoints is at `endpoints.md`.
 
 ## Installation
 
