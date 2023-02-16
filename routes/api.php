@@ -21,7 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->group(function () {
-    Route::apiResource('referees', '\App\Http\Controllers\RefereeController');
+    Route::apiResource('referees', \App\Http\Controllers\RefereeController::class);
+    Route::apiResource('teams', \App\Http\Controllers\TeamController::class);
+
     Route::fallback(function () {
         return response()->json(['message' => 'Route Not Found'], 404);
     })->name('api.fallback.404');
