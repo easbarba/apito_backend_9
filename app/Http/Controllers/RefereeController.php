@@ -20,7 +20,8 @@ class RefereeController extends Controller
     {
         $sortColumn = $request->input('sort', 'id');
 
-        return RefereeResource::collection(Referee::orderBy($sortColumn, 'desc')->paginate(8));
+        return RefereeResource::collection(Referee::orderBy($sortColumn, 'desc')
+                                      ->paginate(8));
     }
 
     /**
@@ -48,7 +49,11 @@ class RefereeController extends Controller
      */
     public function update(Request $request, Referee $referee): JsonResponse
     {
-        $referee->update($request->all());
+        $all = $request->only(['name', 'state']);
+        if (! empty($all)) {
+            $referee->update($all);
+        }
+        var_dump($request->input());
 
         return response()->json(['data' => new RefereeResource($referee)],
             Response::HTTP_OK);
